@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(spinnaker_sdk_camera_driver)
+project(provider_vision)
 
 add_compile_options(-std=c++11)
 
@@ -25,7 +25,7 @@ find_package(catkin REQUIRED COMPONENTS
   dynamic_reconfigure
   nodelet
 )
-
+-
 #find_package(PCL REQUIRED)
 
 ###
