@@ -1,4 +1,4 @@
-# <ENTER_YOUR_NODE_NAME>
+# Provider_power
 
 ![Docker Image CI - Master Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
 ![Docker Image CI - Develop Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
@@ -15,7 +15,7 @@ One Paragraph of project description goes here
 
 Clone current project by using following command :
 ```bash
-    git clone git@github.com:sonia-auv/<ENTER_YOUR_NODE_NAME>.git
+    git clone git@github.com:sonia-auv/provider_power.git
 ```
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
