@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/docker-existing-dockerfile
 {
-	"name": "<ENTER_YOUR_NODE_NAME>",
+	"name": "provider_vision",
 	// Sets the run context to one level up instead of the .devcontainer folder.
 	"context": "..",
 	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
@@ -25,6 +25,6 @@
 	"mounts": [
 		"source=vscode-server-extension,target=/home/sonia/.vscode-server/extensions,type=volume"
 	],
-	"workspaceMount": "target=/home/sonia/ros_sonia_ws/src/<ENTER_YOUR_NODE_NAME>,type=volume",
-	"workspaceFolder": "/home/sonia/ros_sonia_ws/src/<ENTER_YOUR_NODE_NAME>"
+	"workspaceMount": "target=/home/sonia/ros_sonia_ws/src/provider_vision,type=volume",
+	"workspaceFolder": "/home/sonia/ros_sonia_ws/src/provider_vision"
 }

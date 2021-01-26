@@ -12,7 +12,7 @@
                 "task": "build",
                 "type": "catkin_make"
             },
-            "target": "/home/sonia/ros_sonia_ws/src/<ENTER_YOUR_NODE_NAME>/launch/<ENTER_YOUR_NODE_NAME>.launch",
+            "target": "/home/sonia/ros_sonia_ws/src/provider_vision/launch/provider_vision.launch",
         }
     ]
 }
