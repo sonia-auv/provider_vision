@@ -7,7 +7,7 @@ USER root
 ARG BUILD_DATE
 ARG VERSION
 
-ENV NODE_NAME=<ENTER_YOUR_NODE_NAME>
+ENV NODE_NAME=provider_vision
 
 LABEL net.etsmtl.sonia-auv.node.build-date=${BUILD_DATE}
 LABEL net.etsmtl.sonia-auv.node.version=${VERSION}
