@@ -2,7 +2,7 @@
 // required by rest of the application
 
 // Spinnaker SDK
-#include "Spinnaker.h"
+#include "drivers/spinnaker/Spinnaker.h"
 #include "SpinGenApi/SpinnakerGenApi.h"
 
 // OpenCV

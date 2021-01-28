@@ -8,6 +8,10 @@ ARG BUILD_DATE
 ARG VERSION
 
 ENV NODE_NAME=provider_vision
+ENV DRIVER_SPINNAKER_INCLUDE_TARGET_PATH="usr/local/include"
+ENV DRIVER_SPINNAKER_LIB_TARGET_PATH="usr/local/lib"
+ENV DRIVER_SPINNAKER_BIN_TARGET_PATH="usr/local/bin"
+ENV DRIVER_SPINNAKER_SRC_TARGET_PATH="usr/local/src"
 
 LABEL net.etsmtl.sonia-auv.node.build-date=${BUILD_DATE}
 LABEL net.etsmtl.sonia-auv.node.version=${VERSION}
@@ -32,6 +36,11 @@ RUN apt-get update \
 WORKDIR ${SONIA_WS}
 
 COPY . ${NODE_PATH}
+COPY ./drivers/spinnaker/include/ ${DRIVER_SPINNAKER_INCLUDE_TARGET_PATH}
+COPY ./drivers/spinnaker/lib/ ${DRIVER_SPINNAKER_LIB_TARGET_PATH}
+COPY ./drivers/spinnaker/bin/ ${DRIVER_SPINNAKER_BIN_TARGET_PATH}
+COPY ./drivers/spinnaker/src/ ${DRIVER_SPINNAKER_SRC_TARGET_PATH}
+
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
 
 RUN chown -R ${SONIA_USER}: ${SONIA_WS}
