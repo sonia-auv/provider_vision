@@ -15,7 +15,7 @@ One Paragraph of project description goes here
 
 Clone current project by using following command :
 ```bash
-    git clone git@github.com:sonia-auv/provider_power.git
+    git clone git@github.com:sonia-auv/provider_vision.git
 ```
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
