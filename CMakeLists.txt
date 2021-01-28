@@ -10,8 +10,8 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 ###
 #SET("OpenCV_DIR" "~/apps/opencv-2.4.13/")
 set(PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include" CACHE PATH "Project Include Directory")
-set(SPINNAKER_INCLUDE_DIR "/usr/local/include" CACHE PATH "Spinnaker Include Directory")
-set(SPINNAKER_LIB_DIR "/usr/local/lib" CACHE PATH "Spinnaker Libs Directory")
+set(SPINNAKER_INCLUDE_DIR "/opt/spinnaker/include" CACHE PATH "Spinnaker Include Directory")
+set(SPINNAKER_LIB_DIR "/opt/spinnaker/lib" CACHE PATH "Spinnaker Libs Directory")
 # set(yaml-cpp_DIR "~/apps/yaml-cpp" CACHE PATH "yaml-cpp Directory")
 set(CUDA_USE_STATIC_CUDA_RUNTIME  OFF)
 
@@ -71,14 +71,15 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64 OR x86_32)
     INCLUDE_DIRS include
     CATKIN_DEPENDS roscpp std_msgs message_runtime nodelet
     DEPENDS OpenCV LibUnwind
+    dynamic_reconfigure
     )
 
     include_directories(
       ${PROJECT_INCLUDE_DIR}
       ${catkin_INCLUDE_DIRS}
-      SYSTEM ${SPINNAKER_INCLUDE_DIR}
-      SYSTEM ${OpenCV_INCLUDE_DIRS}
-      SYSTEM ${Boost_INCLUDE_DIR}
+      ${SPINNAKER_INCLUDE_DIR}
+      ${OpenCV_INCLUDE_DIRS}
+      ${Boost_INCLUDE_DIR}
       ${LibUnwind_INCLUDE_DIRS}
     )
 
@@ -92,14 +93,15 @@ if(${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 OR arm)
     INCLUDE_DIRS include
     CATKIN_DEPENDS roscpp std_msgs message_runtime nodelet
     DEPENDS OpenCV
+    dynamic_reconfigure
     )
 
     include_directories(
       ${PROJECT_INCLUDE_DIR}
       ${catkin_INCLUDE_DIRS}
-      SYSTEM ${SPINNAKER_INCLUDE_DIR}
-      SYSTEM ${OpenCV_INCLUDE_DIRS}
-      SYSTEM ${Boost_INCLUDE_DIR}
+      ${SPINNAKER_INCLUDE_DIR}
+      ${OpenCV_INCLUDE_DIRS}
+      ${Boost_INCLUDE_DIR}
     )
 
     link_directories( ${SPINNAKER_LIB_DIR} )

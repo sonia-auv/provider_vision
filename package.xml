@@ -25,6 +25,7 @@
   <depend>image_transport</depend>
   <depend>sensor_msgs</depend>
   <depend>nodelet</depend>
+  <depend>dynamic_reconfigure</depend>
   
   <export>
     <nodelet plugin="${prefix}/nodelet_plugins.xml" />
