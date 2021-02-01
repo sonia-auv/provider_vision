@@ -133,7 +133,7 @@ add_executable (nodelet_test src/nodelet_test.cpp)
 add_dependencies(nodelet_test ${catkin_EXPORTED_TARGETS})
 target_link_libraries (nodelet_test capture_nodelet ${LIBS} ${catkin_LIBRARIES})
 
-install(TARGETS acquilib acquisition_node capture_nodelet acquisition_nodelet nodelet_test
+install(TARGETS acquilib provider_vision_node capture_nodelet acquisition_nodelet nodelet_test
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
