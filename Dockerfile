@@ -40,6 +40,8 @@ RUN chmod +x install_spinnaker.sh \
 
 RUN bash -c "source /etc/profile.d/setup_flir_gentl_64.sh 64"
 
+ENV FLIR_GENTL64_CTI=/opt/spinnaker/lib/flir-gentl/FLIR_GenTL.cti
+
 WORKDIR ${SONIA_WS}
 
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
