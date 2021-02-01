@@ -114,11 +114,11 @@ acquisition::Capture::Capture(): it_(nh_), nh_pvt_ ("~") {
     load_cameras();
  
     //initializing the ros publisher
-    acquisition_pub = nh_.advertise<spinnaker_sdk_camera_driver::SpinnakerImageNames>("camera", 1000);
+    acquisition_pub = nh_.advertise<provider_vision::SpinnakerImageNames>("camera", 1000);
     //dynamic reconfigure
-    dynamicReCfgServer_ = new dynamic_reconfigure::Server<spinnaker_sdk_camera_driver::spinnaker_camConfig>(nh_pvt_);
+    dynamicReCfgServer_ = new dynamic_reconfigure::Server<provider_vision::spinnaker_camConfig>(nh_pvt_);
     
-    dynamic_reconfigure::Server<spinnaker_sdk_camera_driver::spinnaker_camConfig>::CallbackType dynamicReCfgServerCB_t;   
+    dynamic_reconfigure::Server<provider_vision::spinnaker_camConfig>::CallbackType dynamicReCfgServerCB_t;   
 
     dynamicReCfgServerCB_t = boost::bind(&acquisition::Capture::dynamicReconfigureCallback,this, _1, _2);
     dynamicReCfgServer_->setCallback(dynamicReCfgServerCB_t);
@@ -193,11 +193,11 @@ acquisition::Capture::Capture(ros::NodeHandle nodehandl, ros::NodeHandle private
     load_cameras();
 
     //initializing the ros publisher
-    acquisition_pub = nh_.advertise<spinnaker_sdk_camera_driver::SpinnakerImageNames>("camera", 1000);
+    acquisition_pub = nh_.advertise<provider_vision::SpinnakerImageNames>("camera", 1000);
     //dynamic reconfigure
-    dynamicReCfgServer_ = new dynamic_reconfigure::Server<spinnaker_sdk_camera_driver::spinnaker_camConfig>(nh_pvt_);
+    dynamicReCfgServer_ = new dynamic_reconfigure::Server<provider_vision::spinnaker_camConfig>(nh_pvt_);
     
-    dynamic_reconfigure::Server<spinnaker_sdk_camera_driver::spinnaker_camConfig>::CallbackType dynamicReCfgServerCB_t;   
+    dynamic_reconfigure::Server<provider_vision::spinnaker_camConfig>::CallbackType dynamicReCfgServerCB_t;   
 
     dynamicReCfgServerCB_t = boost::bind(&acquisition::Capture::dynamicReconfigureCallback,this, _1, _2);
     dynamicReCfgServer_->setCallback(dynamicReCfgServerCB_t);
@@ -1196,7 +1196,7 @@ std::string acquisition::Capture::todays_date()
     return td;
 }
 
-void acquisition::Capture::dynamicReconfigureCallback(spinnaker_sdk_camera_driver::spinnaker_camConfig &config, uint32_t level){
+void acquisition::Capture::dynamicReconfigureCallback(provider_vision::spinnaker_camConfig &config, uint32_t level){
     
     ROS_INFO_STREAM("Dynamic Reconfigure: Level : " << level);
     if(level == 1 || level ==3){
