@@ -121,10 +121,9 @@ target_link_libraries(acquilib ${LIBS} ${catkin_LIBRARIES})
 add_library(capture_nodelet src/capture_nodelet.cpp src/subscriber_nodelet.cpp)
 target_link_libraries(capture_nodelet acquilib ${catkin_LIBRARIES})
 
-add_executable (acquisition_node src/acquisition_node.cpp)
-add_dependencies(acquisition_node acquilib ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
-target_link_libraries (acquisition_node acquilib ${LIBS} ${catkin_LIBRARIES})
-
+add_executable (provider_vision_node src/provider_vision_node.cpp)
+add_dependencies(provider_vision_node acquilib ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
+target_link_libraries (provider_vision_node acquilib ${LIBS} ${catkin_LIBRARIES})
 
 add_executable (acquisition_nodelet src/acquisition_nodelet.cpp)
 add_dependencies(acquisition_nodelet acquilib capture_nodelet ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)

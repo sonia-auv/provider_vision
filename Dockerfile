@@ -38,6 +38,8 @@ WORKDIR ${NODE_PATH}/drivers/spinnaker
 RUN chmod +x install_spinnaker.sh \
      && sh install_spinnaker.sh < input
 
+RUN source /etc/profile.d/setup_flir_gentl_64.sh 64
+
 WORKDIR ${SONIA_WS}
 
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
