@@ -7,7 +7,9 @@ USER root
 ARG BUILD_DATE
 ARG VERSION
 
-ENV NODE_NAME=<ENTER_YOUR_NODE_NAME>
+ARG TARGET_ARCH="x86"
+
+ENV NODE_NAME=provider_vision
 
 LABEL net.etsmtl.sonia-auv.node.build-date=${BUILD_DATE}
 LABEL net.etsmtl.sonia-auv.node.version=${VERSION}
@@ -26,9 +28,24 @@ ENV ENTRYPOINT_ABSPATH=${NODE_PATH}/scripts/${ENTRYPOINT_FILE}
 
 ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 
+RUN apt-get update \
+    && apt-get install -y libunwind-dev
+
 WORKDIR ${SONIA_WS}
 
 COPY . ${NODE_PATH}
+
+WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
+
+RUN chmod +x install_spinnaker.sh \
+     && sh install_spinnaker.sh < input
+
+RUN bash -c "source /etc/profile.d/setup_flir_gentl_64.sh 64"
+
+ENV FLIR_GENTL64_CTI=/opt/spinnaker/lib/flir-gentl/FLIR_GenTL.cti
+
+WORKDIR ${SONIA_WS}
+
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
 
 RUN chown -R ${SONIA_USER}: ${SONIA_WS}
