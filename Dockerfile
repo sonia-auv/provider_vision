@@ -7,6 +7,8 @@ USER root
 ARG BUILD_DATE
 ARG VERSION
 
+ARG TARGET_ARCH="x86"
+
 ENV NODE_NAME=provider_vision
 
 LABEL net.etsmtl.sonia-auv.node.build-date=${BUILD_DATE}
@@ -33,7 +35,7 @@ WORKDIR ${SONIA_WS}
 
 COPY . ${NODE_PATH}
 
-WORKDIR ${NODE_PATH}/drivers/spinnaker
+WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
 
 RUN chmod +x install_spinnaker.sh \
      && sh install_spinnaker.sh < input
