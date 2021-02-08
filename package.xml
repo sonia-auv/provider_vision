@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>provider_vision</name>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <description>The provider_vision package - Point Grey Spinnaker based camera driver</description>
 
   <author>Abhishek Bajpayee</author>
