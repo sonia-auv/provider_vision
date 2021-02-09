@@ -31,11 +31,10 @@ ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 RUN apt-get update \
     && apt-get install -y libunwind-dev
 
-WORKDIR ${SONIA_WS}
-
-COPY . ${NODE_PATH}
-
 WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
+
+#Copy the drivers to install the spinnaker sdk
+COPY ./drivers/${TARGET_ARCH} .
 
 RUN chmod +x install_spinnaker.sh \
      && sh install_spinnaker.sh < input
@@ -45,6 +44,9 @@ RUN bash -c "source /etc/profile.d/setup_flir_gentl_64.sh 64"
 ENV FLIR_GENTL64_CTI=/opt/spinnaker/lib/flir-gentl/FLIR_GenTL.cti
 
 WORKDIR ${SONIA_WS}
+
+#Copy the code of provider_vision and the rest (changes more often then the sdk)
+COPY . ${NODE_PATH}
 
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
 
