@@ -59,7 +59,7 @@ sudo dpkg -i libgentl_*.deb
 # if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
 # then
 #     echo "Launching udev configuration script..."
-    sudo sh configure_spinnaker.sh
+    #sudo sh configure_spinnaker.sh
 # fi
 
 # echo
