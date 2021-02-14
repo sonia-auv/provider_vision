@@ -29,7 +29,7 @@ ENV ENTRYPOINT_ABSPATH=${NODE_PATH}/scripts/${ENTRYPOINT_FILE}
 ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 
 RUN apt-get update \
-    && apt-get install -y libunwind-dev
+    && apt-get install -y libunwind-dev libusb-1.0-0
 
 WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
 
