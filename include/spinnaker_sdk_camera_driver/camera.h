@@ -59,7 +59,7 @@ namespace acquisition {
         // void setTrigMode();
         // void setTriggerOverlapOff();
 
-        string get_id() { return string(get_id_docker()); }
+        string get_id() { return get_id_docker(); }
         int get_id_docker();
         void make_master() { MASTER_ = true; ROS_DEBUG_STREAM( "camera " << get_id() << " set as master"); }
         bool is_master() { return MASTER_; }
