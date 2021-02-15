@@ -28,8 +28,8 @@ ENV ENTRYPOINT_ABSPATH=${NODE_PATH}/scripts/${ENTRYPOINT_FILE}
 
 ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 
-RUN apt-get update \
-    && apt-get install -y libunwind-dev libusb-1.0-0
+RUN apt-get update \ 
+    && apt-get install -y libunwind-dev ros-melodic-cv-bridge ros-melodic-image-transport
 
 WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
 
