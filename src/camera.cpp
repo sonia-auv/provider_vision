@@ -320,9 +320,9 @@ void acquisition::Camera::exposureTest() {
 
 }
 
-int get_id_docker() {
+int acquisition::Camera::get_id_docker() {
     string camera_id = (pCam_->GetUniqueID());
-    string serial_nb = SRL_;
+    string serial_nb = "SRL_";
 
     size_t position = camera_id.find(serial_nb) + 4;
 
