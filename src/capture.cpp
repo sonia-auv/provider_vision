@@ -886,7 +886,7 @@ void acquisition::Capture::run_soft_trig() {
     
     start_acquisition();
 
-    ROS_INFO_STREAM("*** ACQUISITION STARTED ***")
+    ROS_INFO_STREAM("*** ACQUISITION STARTED ***");
 
     // Camera directories created at first save
     
