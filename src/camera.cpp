@@ -320,7 +320,7 @@ void acquisition::Camera::exposureTest() {
 
 }
 
-int acquisition::Camera::get_id_docker() {
+string acquisition::Camera::get_id_docker() {
     string camera_id = string(pCam_->GetUniqueID());
     string serial_nb = "SRL_";
 
