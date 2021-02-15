@@ -852,9 +852,9 @@ void acquisition::Capture::get_mat_images() {
    
 
     for (int i=0; i<numCameras_; i++) {
-        //ROS_INFO_STREAM("CAM ID IS "<< i);
+        ROS_INFO_STREAM("CAM ID IS "<< i);
         frames_[i] = cams[i].grab_mat_frame();
-        //ROS_INFO("sucess");
+        ROS_INFO("sucess");
         time_stamps_[i] = cams[i].get_time_stamp();
 
 
@@ -885,6 +885,8 @@ void acquisition::Capture::run_soft_trig() {
     ROS_INFO("*** ACQUISITION ***");
     
     start_acquisition();
+
+    ROS_INFO_STREAM("*** ACQUISITION STARTED ***")
 
     // Camera directories created at first save
     
