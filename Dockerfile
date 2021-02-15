@@ -30,13 +30,6 @@ ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 
 RUN apt-get update \
     && apt-get install -y libunwind-dev libusb-1.0-0
-<<<<<<< HEAD
-=======
-
-WORKDIR ${SONIA_WS}
-
-COPY . ${NODE_PATH}
->>>>>>> f0b145682114e26272303aba0ffc600c67b741e7
 
 WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
 
