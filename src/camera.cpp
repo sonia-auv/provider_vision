@@ -111,7 +111,7 @@ Mat acquisition::Camera::convert_to_mat(ImagePtr pImage) {
 
 void acquisition::Camera::begin_acquisition() {
 
-    ROS_DEBUG_STREAM("Begin Acquisition...");
+    ROS_INFO_STREAM("Begin Acquisition...");
     pCam_->BeginAcquisition();
     
 }
@@ -121,7 +121,7 @@ void acquisition::Camera::end_acquisition() {
     if (pCam_->GetNumImagesInUse())
         ROS_WARN_STREAM("Some images still currently in use! Use image->Release() before deinitializing.");
         
-    ROS_DEBUG_STREAM("End Acquisition...");
+    ROS_INFO_STREAM("End Acquisition...");
     pCam_->EndAcquisition();    
     
 }

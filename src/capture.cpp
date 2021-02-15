@@ -226,7 +226,6 @@ void acquisition::Capture::load_cameras() {
     
     for (int j=0; j<cam_ids_.size(); j++) {
         bool current_cam_found=false;
-        ROS_INFO_STREAM("Camera Id -"<<cam_ids_[j]);
         for (int i=0; i<numCameras_; i++) {
         
             acquisition::Camera cam(camList_.GetByIndex(i));
@@ -611,7 +610,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
     // Set cameras 1 to 4 to continuous
     for (int i = numCameras_-1 ; i >=0 ; i--) {
                                 
-        ROS_DEBUG_STREAM("Initializing camera " << cam_ids_[i] << "...");
+        ROS_INFO_STREAM("Initializing camera " << cam_ids_[i] << "...");
 
         try {
             
@@ -686,7 +685,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
         }
 
     }
-    ROS_DEBUG_STREAM("All cameras initialized.");
+    ROS_INFO_STREAM("All cameras initialized.");
 }
 
 void acquisition::Capture::start_acquisition() {
