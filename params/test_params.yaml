@@ -1,8 +1,8 @@
 cam_ids:
-- 19208686
+- USB\VID_1E10&SRL_012519EE\&2&3&2
 cam_aliases:
 - cam0
-master_cam: 19208686
+master_cam: USB\VID_1E10&SRL_012519EE\&2&3&2
 skip: 20
 delay: 1.0
 
