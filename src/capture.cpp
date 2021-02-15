@@ -618,8 +618,8 @@ void acquisition::Capture::init_cameras(bool soft = false) {
             if (!soft) {
 
                 cams[i].set_color(color_);
-                cams[i].setIntValue("BinningHorizontal", binning_);
-                cams[i].setIntValue("BinningVertical", binning_);
+                //cams[i].setIntValue("BinningHorizontal", binning_);
+                //cams[i].setIntValue("BinningVertical", binning_);
 
                 cams[i].setEnumValue("ExposureMode", "Timed");
                 if (exposure_time_ > 0) { 
@@ -629,10 +629,10 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                     cams[i].setEnumValue("ExposureAuto", "Continuous");
                 }
                 if (target_grey_value_ > 4.0) {
-                    cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Off");
-                    cams[i].setFloatValue("AutoExposureTargetGreyValue", target_grey_value_);
+                    //cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Off");
+                    //cams[i].setFloatValue("AutoExposureTargetGreyValue", target_grey_value_);
                 } else {
-                    cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Continuous");
+                    //cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Continuous");
                 }
 
                 // cams[i].setIntValue("DecimationHorizontal", decimation_);
