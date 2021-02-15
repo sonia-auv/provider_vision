@@ -226,6 +226,7 @@ void acquisition::Capture::load_cameras() {
     
     for (int j=0; j<cam_ids_.size(); j++) {
         bool current_cam_found=false;
+        ROS_INFO_STREAM("Camera Id -"<<cam_ids_[j]);
         for (int i=0; i<numCameras_; i++) {
         
             acquisition::Camera cam(camList_.GetByIndex(i));
@@ -233,6 +234,7 @@ void acquisition::Capture::load_cameras() {
             if (cam.get_id().compare(cam_ids_[j]) == 0) {
                 current_cam_found=true;
                 if (cam.get_id().compare(master_cam_id_) == 0) {
+                    ROS_INFO_STREAM("Camera set as master -"<<cam.get_id());
                     cam.make_master();
                     master_set = true;
                     MASTER_CAM_ = cam_counter;
