@@ -328,5 +328,5 @@ string acquisition::Camera::get_id_docker() {
 
     serial_nb = camera_id.substr(position, 8);
 
-    return string(stoi(serial_nb, nullptr, 16));
+    return to_string(stoi(serial_nb, nullptr, 16));
 }
