@@ -319,3 +319,14 @@ void acquisition::Camera::exposureTest() {
     ROS_DEBUG_STREAM("Exposure Time: "<<expTime<<endl);
 
 }
+
+int get_id_docker() {
+    string camera_id = (pCam_->GetUniqueID());
+    string serial_nb = SRL_;
+
+    size_t position = camera_id.find(serial_nb) + 4;
+
+    serial_nb = camera_id.substr(position, 8);
+
+    return stoi(serial_nb, nullptr, 16);
+}
