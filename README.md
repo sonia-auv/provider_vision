@@ -1,9 +1,9 @@
 # Provider_power
 
-![Docker Image CI - Master Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
-![Docker Image CI - Develop Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/sonia-auv/<ENTER_YOUR_NODE_NAME>)
-![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/sonia-auv/<ENTER_YOUR_NODE_NAME>.svg)
+![Docker Image CI - Master Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
+![Docker Image CI - Develop Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/sonia-auv/provider_vision)
+![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/sonia-auv/provider_vision.svg)
 
 
 *Please read the instructions and fill in the blanks*
