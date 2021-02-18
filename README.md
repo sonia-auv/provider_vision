@@ -39,6 +39,10 @@ Docker version 19.03.5, build 633a0ea
 
 It means you have it installed. If not follow instructions on how to install it for your OS.
 
+To add a second camera, check the code highlighted in this issue :
+
+https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/issues/44
+
 ### Installing and testing
 
 To test the camera, you can use the repository that has been use to create provider_vision. In the README, they explain how you can test the camera on Ubuntu.
