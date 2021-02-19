@@ -1,9 +1,9 @@
 # Provider_power
 
-![Docker Image CI - Master Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
-![Docker Image CI - Develop Branch](https://github.com/sonia-auv/<ENTER_YOUR_NODE_NAME>/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/sonia-auv/<ENTER_YOUR_NODE_NAME>)
-![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/sonia-auv/<ENTER_YOUR_NODE_NAME>.svg)
+![Docker Image CI - Master Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
+![Docker Image CI - Develop Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/sonia-auv/provider_vision)
+![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/sonia-auv/provider_vision.svg)
 
 
 *Please read the instructions and fill in the blanks*
@@ -39,47 +39,19 @@ Docker version 19.03.5, build 633a0ea
 
 It means you have it installed. If not follow instructions on how to install it for your OS.
 
-### Installing
+To add a second camera, check the code highlighted in this issue :
 
-A step by step series of examples that tell you how to get a development env running
+https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/issues/44
 
-Say what the step will be
+### Installing and testing
 
-```
-Give the example
-```
+To test the camera, you can use the repository that has been use to create provider_vision. In the README, they explain how you can test the camera on Ubuntu.
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+* [Spinnaker SDK Camera Driver](https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/tree/master)
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To deploy the provider_vision, you will need to get the ID of the camera and put the ID in the config files. You can use **FlirSpinview** to get this information.
 
 ## Built With
 
