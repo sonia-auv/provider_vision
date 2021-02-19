@@ -24,7 +24,7 @@
 		"host"
 	],
 	"mounts": [
-		"source=vscode-server-extension,target=/home/sonia/.vscode-server/extensions,type=volume"
+		"source=vscode-server-extension,target=/home/sonia/.vscode-server/extensions,type=volume",
 		"source=/dev,target=/dev,type=bind"
 	],
 	"workspaceMount": "target=/home/sonia/ros_sonia_ws/src/provider_vision,type=volume",
