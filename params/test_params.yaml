@@ -1,10 +1,10 @@
 cam_ids:
-- 19208686 
-#USB\VID_1E10&SRL_012519EE\&2&3&2
+- 19208686
+- 19208682 
 cam_aliases:
-- cam0
+- front
+- bottom
 master_cam: 19208686
-#USB\VID_1E10&SRL_012519EE\&2&3&2
 skip: 20
 delay: 1.0
 
