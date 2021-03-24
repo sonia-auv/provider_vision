@@ -111,7 +111,7 @@ Mat acquisition::Camera::convert_to_mat(ImagePtr pImage) {
 
 void acquisition::Camera::begin_acquisition() {
 
-    ROS_DEBUG_STREAM("Begin Acquisition...");
+    ROS_INFO_STREAM("Begin Acquisition...");
     pCam_->BeginAcquisition();
     
 }
@@ -121,7 +121,7 @@ void acquisition::Camera::end_acquisition() {
     if (pCam_->GetNumImagesInUse())
         ROS_WARN_STREAM("Some images still currently in use! Use image->Release() before deinitializing.");
         
-    ROS_DEBUG_STREAM("End Acquisition...");
+    ROS_INFO_STREAM("End Acquisition...");
     pCam_->EndAcquisition();    
     
 }
@@ -318,4 +318,15 @@ void acquisition::Camera::exposureTest() {
     float expTime=ptrExpTest->GetValue();
     ROS_DEBUG_STREAM("Exposure Time: "<<expTime<<endl);
 
+}
+
+string acquisition::Camera::get_id_docker() {
+    string camera_id = string(pCam_->GetUniqueID());
+    string serial_nb = "SRL_";
+
+    size_t position = camera_id.find(serial_nb) + 4;
+
+    serial_nb = camera_id.substr(position, 8);
+
+    return to_string(stoi(serial_nb, nullptr, 16));
 }
