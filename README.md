@@ -49,6 +49,10 @@ To test the camera, you can use the repository that has been use to create provi
 
 * [Spinnaker SDK Camera Driver](https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/tree/master)
 
+## Documentation
+
+To find more information on the Spinnaker SDK : [Getting started Spinnaker SDK](https://flir.custhelp.com/app/answers/detail/a_id/4327/~/getting-started-with-the-spinnaker-sdk/session/L2F2LzEvdGltZS8xNjE5NDg5NjUwL2dlbi8xNjE5NDg5NjUwL3NpZC9mVTNiYlNTNDlHNWZNRU5PSjhhQkxYQ21TQUhmRmZNcGdjTXlSaDRvZl9qUzl2M25SWkVDTlNiVTAzTzVieU5qayU3RXllZWNXNFdJUldCNHlGY1lzWHk3cGRER242M1lNaGF4NFJTc2ZRNXoxcTV5b21ONVZsNVo2USUyMSUyMQ==)
+
 ## Deployment
 
 To deploy the provider_vision, you will need to get the ID of the camera and put the ID in the config files. You can use **FlirSpinview** to get this information.
