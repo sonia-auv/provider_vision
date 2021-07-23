@@ -233,6 +233,7 @@ void acquisition::Capture::load_cameras() {
             if (cam.get_id().compare(cam_ids_[j]) == 0) {
                 current_cam_found=true;
                 if (cam.get_id().compare(master_cam_id_) == 0) {
+                    ROS_INFO_STREAM("Camera set as master -"<<cam.get_id());
                     cam.make_master();
                     master_set = true;
                     MASTER_CAM_ = cam_counter;
@@ -609,7 +610,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
     // Set cameras 1 to 4 to continuous
     for (int i = numCameras_-1 ; i >=0 ; i--) {
                                 
-        ROS_DEBUG_STREAM("Initializing camera " << cam_ids_[i] << "...");
+        ROS_INFO_STREAM("Initializing camera " << cam_ids_[i] << "...");
 
         try {
             
@@ -618,8 +619,8 @@ void acquisition::Capture::init_cameras(bool soft = false) {
             if (!soft) {
 
                 cams[i].set_color(color_);
-                cams[i].setIntValue("BinningHorizontal", binning_);
-                cams[i].setIntValue("BinningVertical", binning_);
+                //cams[i].setIntValue("BinningHorizontal", binning_);
+                //cams[i].setIntValue("BinningVertical", binning_);
 
                 cams[i].setEnumValue("ExposureMode", "Timed");
                 if (exposure_time_ > 0) { 
@@ -629,10 +630,10 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                     cams[i].setEnumValue("ExposureAuto", "Continuous");
                 }
                 if (target_grey_value_ > 4.0) {
-                    cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Off");
-                    cams[i].setFloatValue("AutoExposureTargetGreyValue", target_grey_value_);
+                    //cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Off");
+                    //cams[i].setFloatValue("AutoExposureTargetGreyValue", target_grey_value_);
                 } else {
-                    cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Continuous");
+                    //cams[i].setEnumValue("AutoExposureTargetGreyValueAuto", "Continuous");
                 }
 
                 // cams[i].setIntValue("DecimationHorizontal", decimation_);
@@ -640,7 +641,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                 // cams[i].setFloatValue("AcquisitionFrameRate", 5.0);
 
                 if (color_)
-                    cams[i].setEnumValue("PixelFormat", "BGR8");
+                    cams[i].setEnumValue("PixelFormat", "BayerRG8");
                     else
                         cams[i].setEnumValue("PixelFormat", "Mono8");
                 cams[i].setEnumValue("AcquisitionMode", "Continuous");
@@ -684,7 +685,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
         }
 
     }
-    ROS_DEBUG_STREAM("All cameras initialized.");
+    ROS_INFO_STREAM("All cameras initialized.");
 }
 
 void acquisition::Capture::start_acquisition() {
@@ -851,9 +852,9 @@ void acquisition::Capture::get_mat_images() {
    
 
     for (int i=0; i<numCameras_; i++) {
-        //ROS_INFO_STREAM("CAM ID IS "<< i);
+        ROS_DEBUG_STREAM("CAM ID IS "<< i);
         frames_[i] = cams[i].grab_mat_frame();
-        //ROS_INFO("sucess");
+        ROS_DEBUG_STREAM("sucess");
         time_stamps_[i] = cams[i].get_time_stamp();
 
 
@@ -884,6 +885,8 @@ void acquisition::Capture::run_soft_trig() {
     ROS_INFO("*** ACQUISITION ***");
     
     start_acquisition();
+
+    ROS_INFO_STREAM("*** ACQUISITION STARTED ***");
 
     // Camera directories created at first save
     

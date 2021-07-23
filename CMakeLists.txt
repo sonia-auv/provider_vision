@@ -23,7 +23,6 @@ find_package(catkin REQUIRED COMPONENTS
   image_transport
   sensor_msgs
   dynamic_reconfigure
-  nodelet
 )
 
 
@@ -70,7 +69,7 @@ generate_messages(
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64 OR x86_32)
     catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS roscpp std_msgs message_runtime nodelet
+    CATKIN_DEPENDS roscpp std_msgs message_runtime
     DEPENDS OpenCV LibUnwind
     dynamic_reconfigure
     )
@@ -92,7 +91,7 @@ endif(${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64 OR x86_32)
 if(${CMAKE_SYSTEM_PROCESSOR} MATCHES aarch64 OR arm)
     catkin_package(
     INCLUDE_DIRS include
-    CATKIN_DEPENDS roscpp std_msgs message_runtime nodelet
+    CATKIN_DEPENDS roscpp std_msgs message_runtime
     DEPENDS OpenCV
     dynamic_reconfigure
     )
@@ -119,22 +118,11 @@ add_library (acquilib SHARED
 add_dependencies(acquilib ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 target_link_libraries(acquilib ${LIBS} ${catkin_LIBRARIES})
 
-add_library(capture_nodelet src/capture_nodelet.cpp src/subscriber_nodelet.cpp)
-target_link_libraries(capture_nodelet acquilib ${catkin_LIBRARIES})
-
 add_executable (provider_vision_node src/provider_vision_node.cpp)
 add_dependencies(provider_vision_node acquilib ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
 target_link_libraries (provider_vision_node acquilib ${LIBS} ${catkin_LIBRARIES})
 
-add_executable (acquisition_nodelet src/acquisition_nodelet.cpp)
-add_dependencies(acquisition_nodelet acquilib capture_nodelet ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencfg)
-target_link_libraries (acquisition_nodelet acquilib capture_nodelet ${LIBS} ${catkin_LIBRARIES})
-
-add_executable (nodelet_test src/nodelet_test.cpp)
-add_dependencies(nodelet_test ${catkin_EXPORTED_TARGETS})
-target_link_libraries (nodelet_test capture_nodelet ${LIBS} ${catkin_LIBRARIES})
-
-install(TARGETS acquilib provider_vision_node capture_nodelet acquisition_nodelet nodelet_test
+install(TARGETS acquilib provider_vision_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

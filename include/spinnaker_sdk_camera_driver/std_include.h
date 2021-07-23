@@ -35,6 +35,7 @@
 #include <omp.h>
 #include <signal.h>
 #include <cstdlib>
+#include <string>
 
 #include <queue> 
 #include <boost/thread.hpp>

@@ -28,8 +28,8 @@ ENV ENTRYPOINT_ABSPATH=${NODE_PATH}/scripts/${ENTRYPOINT_FILE}
 
 ENV SONIA_WS_SETUP=${SONIA_WS}/devel/setup.bash
 
-RUN apt-get update \
-    && apt-get install -y libunwind-dev
+RUN apt-get update \ 
+    && apt-get install -y libunwind-dev ros-melodic-cv-bridge ros-melodic-image-transport
 
 WORKDIR ${NODE_PATH}/drivers/${TARGET_ARCH}
 
@@ -51,6 +51,7 @@ COPY . ${NODE_PATH}
 RUN bash -c "source ${ROS_WS_SETUP}; source ${BASE_LIB_WS_SETUP}; catkin_make"
 
 RUN chown -R ${SONIA_USER}: ${SONIA_WS}
+RUN usermod -a -G root ${SONIA_USER}
 USER ${SONIA_USER}
 
 RUN mkdir ${SCRIPT_DIR}
