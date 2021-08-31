@@ -670,7 +670,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                     cams[i].setEnumValue("LineSelector", "Line3");
                     cams[i].setEnumValue("TriggerSource", "Line3");
                     cams[i].setEnumValue("TriggerSelector", "FrameStart");
-                    cams[i].setEnumValue("LineMode", "Input");
+                    cams[i].setEnumValue("LineMode", "Output");
                     
 //                    cams[i].setFloatValue("TriggerDelay", 40.0);
                     cams[i].setEnumValue("TriggerOverlap", "ReadOut");//"Off"
