@@ -649,11 +649,13 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                 // set only master to be software triggered
                 if (cams[i].is_master()) { 
                     if (MAX_RATE_SAVE_){
+                      ROS_INFO_STREAM("Master Camera Max Rate");
                       cams[i].setEnumValue("LineSelector", "Line2");
                       cams[i].setEnumValue("LineMode", "Output");
                       cams[i].setBoolValue("AcquisitionFrameRateEnable", false);
                       //cams[i].setFloatValue("AcquisitionFrameRate", 170);
                     }else{
+                      ROS_INFO_STREAM("Master Camera");
                       cams[i].setEnumValue("TriggerMode", "On");
                       cams[i].setEnumValue("LineSelector", "Line2");
                       cams[i].setEnumValue("LineMode", "Output");
@@ -663,6 +665,7 @@ void acquisition::Capture::init_cameras(bool soft = false) {
 
 
                 } else {
+                    ROS_INFO_STREAM("Slave Camera");
                     cams[i].setEnumValue("TriggerMode", "On");
                     cams[i].setEnumValue("LineSelector", "Line3");
                     cams[i].setEnumValue("TriggerSource", "Line3");
