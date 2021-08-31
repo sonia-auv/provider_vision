@@ -929,11 +929,12 @@ void acquisition::Capture::run_soft_trig() {
                 }
             }
 
+            ROS_INFO_STREAM("Waug for key.");
             int key = cvWaitKey(1);
             ROS_DEBUG_STREAM("Key press: "<<(key & 255)<<endl);
             
             if ( (key & 255)!=255 ) {
-
+                 ROS_INFO_STREAM("Enter in key loop");
                 if ( (key & 255)==83 ) {
                     if (CAM_<numCameras_-1) // RIGHT ARROW
                         CAM_++;
@@ -963,11 +964,15 @@ void acquisition::Capture::run_soft_trig() {
                 ROS_DEBUG_STREAM("active cam switched to: "<<CAM_);
             }
 
+             ROS_INFO_STREAM("End key press");
             double disp_time_ = ros::Time::now().toSec() - t;
 
             // Call update functions
             if (!MANUAL_TRIGGER_) {
-                cams[MASTER_CAM_].trigger();
+                for(int i = 0; i < cams.size(); ++i)
+                {
+                    cams[i].trigger();
+                }
                 get_mat_images();
             }
 
@@ -988,6 +993,7 @@ void acquisition::Capture::run_soft_trig() {
                 }
             }
             
+            ROS_INFO_STREAM("Export to ROS");
             if (EXPORT_TO_ROS_) export_to_ROS();
             //cams[MASTER_CAM_].targetGreyValueTest();
             // ros publishing messages
@@ -1011,7 +1017,7 @@ void acquisition::Capture::run_soft_trig() {
         }
     }
     catch(const std::exception &e){
-        ROS_FATAL_STREAM("Excption: "<<e.what());
+        ROS_FATAL_STREAM("Exception: "<<e.what());
     }
     catch(...){
         ROS_FATAL_STREAM("Some unknown exception occured. \v Exiting gracefully, \n  possible reason could be Camera Disconnection...");
