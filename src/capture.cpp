@@ -651,14 +651,14 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                     if (MAX_RATE_SAVE_){
                       ROS_INFO_STREAM("Master Camera Max Rate");
                       cams[i].setEnumValue("LineSelector", "Line2");
-                      //cams[i].setEnumValue("LineMode", "Output");
+                      cams[i].setEnumValue("LineMode", "Output");
                       cams[i].setBoolValue("AcquisitionFrameRateEnable", false);
                       //cams[i].setFloatValue("AcquisitionFrameRate", 170);
                     }else{
                       ROS_INFO_STREAM("Master Camera");
                       cams[i].setEnumValue("TriggerMode", "On");
                       cams[i].setEnumValue("LineSelector", "Line2");
-                      //cams[i].setEnumValue("LineMode", "Output");
+                      cams[i].setEnumValue("LineMode", "Output");
                       cams[i].setEnumValue("TriggerSource", "Software");
                     }
                     //cams[i].setEnumValue("LineSource", "ExposureActive");
@@ -668,13 +668,13 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                     ROS_INFO_STREAM("Slave Camera");
                     cams[i].setEnumValue("TriggerMode", "On");
                     cams[i].setEnumValue("LineSelector", "Line3");
-                    cams[i].setEnumValue("TriggerSource", "Line3");
-                    cams[i].setEnumValue("TriggerSelector", "FrameStart");
-                    //cams[i].setEnumValue("LineMode", "Output");
+                    cams[i].setEnumValue("TriggerSource", "Software");
+                    //cams[i].setEnumValue("TriggerSelector", "FrameStart");
+                    cams[i].setEnumValue("LineMode", "Output");
                     
 //                    cams[i].setFloatValue("TriggerDelay", 40.0);
-                    cams[i].setEnumValue("TriggerOverlap", "ReadOut");//"Off"
-                    cams[i].setEnumValue("TriggerActivation", "RisingEdge");
+                    //cams[i].setEnumValue("TriggerOverlap", "ReadOut");//"Off"
+                    //cams[i].setEnumValue("TriggerActivation", "RisingEdge");
                 }
             }
         }
@@ -897,7 +897,11 @@ void acquisition::Capture::run_soft_trig() {
 
     int count = 0;
     
-    cams[MASTER_CAM_].trigger();
+    for(int i = 0; i < cams.size(); ++i)
+    {
+        cams[i].trigger();
+    }
+    
     get_mat_images();
     if (SAVE_) {
         count++;
