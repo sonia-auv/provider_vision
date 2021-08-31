@@ -1,4 +1,4 @@
-# Provider_power
+# Provider_Vision
 
 ![Docker Image CI - Master Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Master%20Branch/badge.svg)
 ![Docker Image CI - Develop Branch](https://github.com/sonia-auv/provider_vision/workflows/Docker%20Image%20CI%20-%20Develop%20Branch/badge.svg?branch=develop)
@@ -48,6 +48,10 @@ https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/issues/44
 To test the camera, you can use the repository that has been use to create provider_vision. In the README, they explain how you can test the camera on Ubuntu.
 
 * [Spinnaker SDK Camera Driver](https://github.com/neufieldrobotics/spinnaker_sdk_camera_driver/tree/master)
+
+## Documentation
+
+To find more information on the Spinnaker SDK : [Getting started Spinnaker SDK](https://flir.custhelp.com/app/answers/detail/a_id/4327/~/getting-started-with-the-spinnaker-sdk/session/L2F2LzEvdGltZS8xNjE5NDg5NjUwL2dlbi8xNjE5NDg5NjUwL3NpZC9mVTNiYlNTNDlHNWZNRU5PSjhhQkxYQ21TQUhmRmZNcGdjTXlSaDRvZl9qUzl2M25SWkVDTlNiVTAzTzVieU5qayU3RXllZWNXNFdJUldCNHlGY1lzWHk3cGRER242M1lNaGF4NFJTc2ZRNXoxcTV5b21ONVZsNVo2USUyMSUyMQ==)
 
 ## Deployment
 
