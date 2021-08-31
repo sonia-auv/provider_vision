@@ -929,7 +929,6 @@ void acquisition::Capture::run_soft_trig() {
                 }
             }
 
-            ROS_INFO_STREAM("Waug for key.");
             int key = cvWaitKey(1);
             ROS_DEBUG_STREAM("Key press: "<<(key & 255)<<endl);
             
@@ -964,7 +963,6 @@ void acquisition::Capture::run_soft_trig() {
                 ROS_DEBUG_STREAM("active cam switched to: "<<CAM_);
             }
 
-             ROS_INFO_STREAM("End key press");
             double disp_time_ = ros::Time::now().toSec() - t;
 
             // Call update functions
@@ -993,7 +991,6 @@ void acquisition::Capture::run_soft_trig() {
                 }
             }
             
-            ROS_INFO_STREAM("Export to ROS");
             if (EXPORT_TO_ROS_) export_to_ROS();
             //cams[MASTER_CAM_].targetGreyValueTest();
             // ros publishing messages
