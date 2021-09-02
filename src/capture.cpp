@@ -649,11 +649,13 @@ void acquisition::Capture::init_cameras(bool soft = false) {
                 // set only master to be software triggered
                 if (cams[i].is_master()) { 
                     if (MAX_RATE_SAVE_){
+                      ROS_INFO_STREAM("Master Camera Max Rate");
                       cams[i].setEnumValue("LineSelector", "Line2");
                       cams[i].setEnumValue("LineMode", "Output");
                       cams[i].setBoolValue("AcquisitionFrameRateEnable", false);
                       //cams[i].setFloatValue("AcquisitionFrameRate", 170);
                     }else{
+                      ROS_INFO_STREAM("Master Camera");
                       cams[i].setEnumValue("TriggerMode", "On");
                       cams[i].setEnumValue("LineSelector", "Line2");
                       cams[i].setEnumValue("LineMode", "Output");
@@ -663,15 +665,16 @@ void acquisition::Capture::init_cameras(bool soft = false) {
 
 
                 } else {
+                    ROS_INFO_STREAM("Slave Camera");
                     cams[i].setEnumValue("TriggerMode", "On");
                     cams[i].setEnumValue("LineSelector", "Line3");
-                    cams[i].setEnumValue("TriggerSource", "Line3");
-                    cams[i].setEnumValue("TriggerSelector", "FrameStart");
-                    cams[i].setEnumValue("LineMode", "Input");
+                    cams[i].setEnumValue("TriggerSource", "Software");
+                    //cams[i].setEnumValue("TriggerSelector", "FrameStart");
+                    cams[i].setEnumValue("LineMode", "Output");
                     
 //                    cams[i].setFloatValue("TriggerDelay", 40.0);
-                    cams[i].setEnumValue("TriggerOverlap", "ReadOut");//"Off"
-                    cams[i].setEnumValue("TriggerActivation", "RisingEdge");
+                    //cams[i].setEnumValue("TriggerOverlap", "ReadOut");//"Off"
+                    //cams[i].setEnumValue("TriggerActivation", "RisingEdge");
                 }
             }
         }
@@ -894,7 +897,11 @@ void acquisition::Capture::run_soft_trig() {
 
     int count = 0;
     
-    cams[MASTER_CAM_].trigger();
+    for(int i = 0; i < cams.size(); ++i)
+    {
+        cams[i].trigger();
+    }
+    
     get_mat_images();
     if (SAVE_) {
         count++;
@@ -926,7 +933,7 @@ void acquisition::Capture::run_soft_trig() {
             ROS_DEBUG_STREAM("Key press: "<<(key & 255)<<endl);
             
             if ( (key & 255)!=255 ) {
-
+                 ROS_INFO_STREAM("Enter in key loop");
                 if ( (key & 255)==83 ) {
                     if (CAM_<numCameras_-1) // RIGHT ARROW
                         CAM_++;
@@ -960,7 +967,10 @@ void acquisition::Capture::run_soft_trig() {
 
             // Call update functions
             if (!MANUAL_TRIGGER_) {
-                cams[MASTER_CAM_].trigger();
+                for(int i = 0; i < cams.size(); ++i)
+                {
+                    cams[i].trigger();
+                }
                 get_mat_images();
             }
 
@@ -1004,7 +1014,7 @@ void acquisition::Capture::run_soft_trig() {
         }
     }
     catch(const std::exception &e){
-        ROS_FATAL_STREAM("Excption: "<<e.what());
+        ROS_FATAL_STREAM("Exception: "<<e.what());
     }
     catch(...){
         ROS_FATAL_STREAM("Some unknown exception occured. \v Exiting gracefully, \n  possible reason could be Camera Disconnection...");
