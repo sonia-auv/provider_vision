@@ -106,7 +106,7 @@ Mat acquisition::Camera::convert_to_mat(ImagePtr pImage) {
         img = Mat(colsize + YPadding, rowsize + XPadding, CV_8UC1, convertedImage->GetData(), convertedImage->GetStride());
     
     // resize the image
-    cv::resize(img, img, cv::Size(600,400), cv::INTER_LINEAR)
+    cv::resize(img, img, cv::Size(600,400), cv::INTER_LINEAR);
     return img.clone();
     // return img;
     
