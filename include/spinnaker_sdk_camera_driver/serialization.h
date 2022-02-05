@@ -7,7 +7,7 @@
 #include <boost/serialization/vector.hpp>
 
 using namespace std;
-using namespace cv2;
+using namespace cv;
 
 BOOST_SERIALIZATION_SPLIT_FREE(Mat)
 namespace boost {

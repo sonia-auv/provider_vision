@@ -9,7 +9,7 @@
 using namespace Spinnaker;
 using namespace Spinnaker::GenApi;
 using namespace Spinnaker::GenICam;
-using namespace cv2;
+using namespace cv;
 using namespace std;
 
 namespace acquisition {
