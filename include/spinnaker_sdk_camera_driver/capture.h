@@ -22,7 +22,7 @@
 using namespace Spinnaker;
 using namespace Spinnaker::GenApi;
 using namespace Spinnaker::GenICam;
-using namespace cv;
+using namespace cv2;
 using namespace std;
 
 namespace acquisition {
