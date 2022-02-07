@@ -1,8 +1,8 @@
-name: Docker Image CI - Feature Branch
+name: Docker Image CI - Fix Branch
 
 on:
   push:
-    branches: [feature/**]
+    branches: [fix/**]
 
 jobs:
   build-ros-perception-x86-64:
@@ -12,7 +12,7 @@ jobs:
       BASE_IMAGE: "docker.pkg.github.com/sonia-auv/sonia_common/sonia_common:x86-perception-latest"
       ARCH: x86
       TARGET_TYPE: perception
-      TARGET_VERSION: feature
+      TARGET_VERSION: fix
       IMAGE_NAME: provider_vision
       GITHUB_REMOTE_URL: docker.pkg.github.com/${{ github.repository }}
     steps:
@@ -22,11 +22,11 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
       - name: Build the docker image (perception based)
         run: |
-          docker build . --tag build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S') --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg TARGET_ARCH=${ARCH}
+          docker build . --tag build-fix-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S') --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg TARGET_ARCH=${ARCH}
 
       - name: Create Docker Image Tag
         run: |
-          docker tag build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} ${GITHUB_REMOTE_URL}/${IMAGE_NAME}:${ARCH}-${TARGET_TYPE}-${TARGET_VERSION}-${GITHUB_REF##*/}
+          docker tag build-fix-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} ${GITHUB_REMOTE_URL}/${IMAGE_NAME}:${ARCH}-${TARGET_TYPE}-${TARGET_VERSION}-${GITHUB_REF##*/}
 
       - name: Push Image to Github Packages Registry
         run: |
@@ -39,7 +39,7 @@ jobs:
       BASE_IMAGE: "docker.pkg.github.com/sonia-auv/sonia_common/sonia_common:arm64-perception-latest"
       ARCH: arm64
       TARGET_TYPE: perception
-      TARGET_VERSION: feature
+      TARGET_VERSION: fix
       IMAGE_NAME: provider_vision
       GITHUB_REMOTE_URL: docker.pkg.github.com/${{ github.repository }}
     steps:
@@ -47,7 +47,7 @@ jobs:
       - name: Login to Github Package Registry
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-      - name: Enable Docker Daemon Experimental Features
+      - name: Enable Docker Daemon Experimental features
         run: |
           sudo rm /etc/docker/daemon.json
           echo '{"experimental": true , "cgroup-parent": "/actions_job" }' | sudo tee -a /etc/docker/daemon.json
@@ -62,12 +62,12 @@ jobs:
 
       - name: Build the docker image (perception based)
         run: |
-          docker build . --tag build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S') --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg TARGET_ARCH=${ARCH}
-          docker inspect build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER}
+          docker build . --tag build-fix-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S') --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg TARGET_ARCH=${ARCH}
+          docker inspect build-fix-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER}
 
       - name: Create Docker Image Tag
         run: |
-          docker tag build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} ${GITHUB_REMOTE_URL}/${IMAGE_NAME}:${ARCH}-${TARGET_TYPE}-${TARGET_VERSION}-${GITHUB_REF##*/}
+          docker tag build-fix-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} ${GITHUB_REMOTE_URL}/${IMAGE_NAME}:${ARCH}-${TARGET_TYPE}-${TARGET_VERSION}-${GITHUB_REF##*/}
 
       - name: Push Image to Github Packages Registry
         run: |

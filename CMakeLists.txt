@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.0.2)
 project(provider_vision)
 
 add_compile_options(-std=c++11)
@@ -8,7 +8,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 ###
 # camera Acquisition specific 
 ###
-#SET("OpenCV_DIR" "~/apps/opencv-2.4.13/")
+#SET("OpenCV_DIR" "~/apps/opencv-4.2.0/")
 set(PROJECT_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include" CACHE PATH "Project Include Directory")
 set(SPINNAKER_INCLUDE_DIR "/opt/spinnaker/include" CACHE PATH "Spinnaker Include Directory")
 set(SPINNAKER_LIB_DIR "/opt/spinnaker/lib" CACHE PATH "Spinnaker Libs Directory")
