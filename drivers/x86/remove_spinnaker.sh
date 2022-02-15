@@ -16,8 +16,8 @@ echo "Removing Spinnaker packages..."
 
 sudo dpkg -P spinnaker-doc
 sudo dpkg -P spinnaker
-dpkg -l | grep 'spinview-qt.*-dev' | awk '{print $2}' | xargs -n1 -r sudo dpkg -P
-dpkg -l | grep 'spinview-qt.*' | awk '{print $2}' | xargs -n1 -r sudo dpkg -P
+dpkg -l | grep 'spinview-qt.*-dev' | awk '{print $2}' | xargs -n1 -r sudo apt-get -y purge
+dpkg -l | grep 'spinview-qt.*' | awk '{print $2}' | xargs -n1 -r sudo apt-get -y purge
 dpkg -l | grep 'spinupdate.*-dev' | awk '{print $2}' | xargs -n1 -r sudo dpkg -P
 dpkg -l | grep 'spinupdate.*' | awk '{print $2}' | xargs -n1 -r sudo dpkg -P
 dpkg -l | grep 'libspinvideo-c.*-dev' | awk '{print $2}' | xargs -n1 -r sudo dpkg -P
