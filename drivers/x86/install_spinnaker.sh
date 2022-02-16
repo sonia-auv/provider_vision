@@ -2,19 +2,19 @@
 
 set -o errexit
 
-MY_YESNO_PROMPT='[Y/n] $ '
+# MY_YESNO_PROMPT='[Y/n] $ '
 
-# Web page links
-FEEDBACK_PAGE='https://www.flir.com/spinnaker/survey'
+# # Web page links
+# FEEDBACK_PAGE='https://www.flir.com/spinnaker/survey'
 
-echo "This is a script to assist with installation of the Spinnaker SDK."
-echo "Would you like to continue and install all the Spinnaker SDK packages?"
-echo -n "$MY_YESNO_PROMPT"
-read confirm
-if ! ( [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ] )
-then
-    exit 0
-fi
+# echo "This is a script to assist with installation of the Spinnaker SDK."
+# echo "Would you like to continue and install all the Spinnaker SDK packages?"
+# echo -n "$MY_YESNO_PROMPT"
+# read confirm
+# if ! ( [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ] )
+# then
+#     exit 0
+# fi
 
 echo
 
@@ -22,16 +22,16 @@ set +o errexit
 EXISTING_VERSION=$(dpkg -s spinnaker 2> /dev/null | grep '^Version:' | sed 's/^.*: //')
 set -o errexit
 
-if [ ! -z "$EXISTING_VERSION" ]; then
-    echo "A previous installation of Spinnaker has been detected on this machine (Version: $EXISTING_VERSION). Please consider uninstalling the previous version of Spinnaker before continuing with this installation." >&2
-    echo "Would you like to continue with this installation?"
-    echo -n "$MY_YESNO_PROMPT"
-    read confirm
-    if ! ( [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ] )
-    then
-        exit 0
-    fi
-fi
+# if [ ! -z "$EXISTING_VERSION" ]; then
+#     echo "A previous installation of Spinnaker has been detected on this machine (Version: $EXISTING_VERSION). Please consider uninstalling the previous version of Spinnaker before continuing with this installation." >&2
+#     echo "Would you like to continue with this installation?"
+#     echo -n "$MY_YESNO_PROMPT"
+#     read confirm
+#     if ! ( [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ] )
+#     then
+#         exit 0
+#     fi
+# fi
 
 echo "Installing Spinnaker packages..."
 
@@ -52,46 +52,46 @@ sudo dpkg -i spinupdate-dev_*.deb
 sudo dpkg -i spinnaker_*.deb
 sudo dpkg -i spinnaker-doc_*.deb
 
-echo
-echo "Would you like to add a udev entry to allow access to USB hardware?"
-echo "  If a udev entry is not added, your cameras may only be accessible by running Spinnaker as sudo."
-echo -n "$MY_YESNO_PROMPT"
-read confirm
-if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
-then
-    echo "Launching udev configuration script..."
-    sudo sh configure_spinnaker.sh
-fi
+# echo
+# echo "Would you like to add a udev entry to allow access to USB hardware?"
+# echo "  If a udev entry is not added, your cameras may only be accessible by running Spinnaker as sudo."
+# echo -n "$MY_YESNO_PROMPT"
+# read confirm
+# if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
+# then
+#     echo "Launching udev configuration script..."
+#     sudo sh configure_spinnaker.sh
+# fi
 
-echo
-echo "Would you like to set USB-FS memory size to 1000 MB at startup (via /etc/rc.local)?"
-echo "  By default, Linux systems only allocate 16 MB of USB-FS buffer memory for all USB devices."
-echo "  This may result in image acquisition issues from high-resolution cameras or multiple-camera set ups."
-echo "  NOTE: You can set this at any time by following the USB notes in the included README."
-echo -n "$MY_YESNO_PROMPT"
-read confirm
-if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
-then
-    echo "Launching USB-FS configuration script..."
+# echo
+# echo "Would you like to set USB-FS memory size to 1000 MB at startup (via /etc/rc.local)?"
+# echo "  By default, Linux systems only allocate 16 MB of USB-FS buffer memory for all USB devices."
+# echo "  This may result in image acquisition issues from high-resolution cameras or multiple-camera set ups."
+# echo "  NOTE: You can set this at any time by following the USB notes in the included README."
+# echo -n "$MY_YESNO_PROMPT"
+# read confirm
+# if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
+# then
+#     echo "Launching USB-FS configuration script..."
     sudo sh configure_usbfs.sh
-fi
+# fi
 
-echo
+# echo
 
-echo "Would you like to have Spinnaker prebuilt examples available in your system path?"
-echo "  This allows Spinnaker prebuilt examples to run from any paths on the system."
-echo "  NOTE: You can add the Spinnaker example paths at any time by following the \"RUNNING PREBUILT UTILITIES\""
-echo "        section in the included README."
-echo -n "$MY_YESNO_PROMPT"
+# echo "Would you like to have Spinnaker prebuilt examples available in your system path?"
+# echo "  This allows Spinnaker prebuilt examples to run from any paths on the system."
+# echo "  NOTE: You can add the Spinnaker example paths at any time by following the \"RUNNING PREBUILT UTILITIES\""
+# echo "        section in the included README."
+# echo -n "$MY_YESNO_PROMPT"
 
-read confirm
-if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
-then
-    echo "Launching Spinnaker paths configuration script..."
+# read confirm
+# if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
+# then
+#     echo "Launching Spinnaker paths configuration script..."
     sudo sh configure_spinnaker_paths.sh
-fi
+# fi
 
-echo
+# echo
 
 ARCH=$(ls libspinnaker_* | grep -oP '[0-9]_\K.*(?=.deb)' || [[ $? == 1 ]])
 if [ "$ARCH" = "amd64" ]; then
@@ -104,17 +104,17 @@ if [ -z "$BITS" ]; then
     echo "Could not automatically add the FLIR GenTL Producer to the GenTL environment variable."
     echo "To use the FLIR GenTL Producer, please follow the GenTL Setup notes in the included README."
 else
-    echo "Would you like to have the FLIR GenTL Producer added to GENICAM_GENTL${BITS}_PATH?"
-    echo "  This allows GenTL consumer applications to load the FLIR GenTL Producer."
-    echo "  NOTE: You can add the FLIR producer to GENICAM_GENTL${BITS}_PATH at any time by following the GenTL Setup notes in the included README."
-    echo -n "$MY_YESNO_PROMPT"
+    # echo "Would you like to have the FLIR GenTL Producer added to GENICAM_GENTL${BITS}_PATH?"
+    # echo "  This allows GenTL consumer applications to load the FLIR GenTL Producer."
+    # echo "  NOTE: You can add the FLIR producer to GENICAM_GENTL${BITS}_PATH at any time by following the GenTL Setup notes in the included README."
+    # echo -n "$MY_YESNO_PROMPT"
 
-    read confirm
-    if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
-    then
-        echo "Launching GenTL path configuration script..."
+    # read confirm
+    # if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
+    # then
+    #     echo "Launching GenTL path configuration script..."
         sudo sh configure_gentl_paths.sh $BITS
-    fi
+    # fi
 fi
 
 echo
