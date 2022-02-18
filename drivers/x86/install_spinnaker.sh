@@ -4,7 +4,7 @@ set -o errexit
 
 # MY_YESNO_PROMPT='[Y/n] $ '
 
-# Web page links
+# # Web page links
 # FEEDBACK_PAGE='https://www.flir.com/spinnaker/survey'
 
 # echo "This is a script to assist with installation of the Spinnaker SDK."
@@ -35,6 +35,8 @@ set -o errexit
 
 echo "Installing Spinnaker packages..."
 
+
+sudo dpkg -i libgentl_*.deb
 sudo dpkg -i libspinnaker_*.deb
 sudo dpkg -i libspinnaker-dev_*.deb
 sudo dpkg -i libspinnaker-c_*.deb
@@ -43,13 +45,12 @@ sudo dpkg -i libspinvideo_*.deb
 sudo dpkg -i libspinvideo-dev_*.deb
 sudo dpkg -i libspinvideo-c_*.deb
 sudo dpkg -i libspinvideo-c-dev_*.deb
-sudo dpkg -i spinview-qt_*.deb
+sudo apt-get install -y ./spinview-qt_*.deb
 sudo dpkg -i spinview-qt-dev_*.deb
 sudo dpkg -i spinupdate_*.deb
 sudo dpkg -i spinupdate-dev_*.deb
 sudo dpkg -i spinnaker_*.deb
 sudo dpkg -i spinnaker-doc_*.deb
-sudo dpkg -i libgentl_*.deb
 
 # echo
 # echo "Would you like to add a udev entry to allow access to USB hardware?"
@@ -59,7 +60,7 @@ sudo dpkg -i libgentl_*.deb
 # if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
 # then
 #     echo "Launching udev configuration script..."
-#    sudo sh configure_spinnaker.sh
+#     sudo sh configure_spinnaker.sh
 # fi
 
 # echo
@@ -90,7 +91,7 @@ sudo dpkg -i libgentl_*.deb
     sudo sh configure_spinnaker_paths.sh
 # fi
 
-echo
+# echo
 
 ARCH=$(ls libspinnaker_* | grep -oP '[0-9]_\K.*(?=.deb)' || [[ $? == 1 ]])
 if [ "$ARCH" = "amd64" ]; then
@@ -103,9 +104,9 @@ if [ -z "$BITS" ]; then
     echo "Could not automatically add the FLIR GenTL Producer to the GenTL environment variable."
     echo "To use the FLIR GenTL Producer, please follow the GenTL Setup notes in the included README."
 else
-    echo "Would you like to have the FLIR GenTL Producer added to GENICAM_GENTL${BITS}_PATH?"
-    echo "  This allows GenTL consumer applications to load the FLIR GenTL Producer."
-    echo "  NOTE: You can add the FLIR producer to GENICAM_GENTL${BITS}_PATH at any time by following the GenTL Setup notes in the included README."
+    # echo "Would you like to have the FLIR GenTL Producer added to GENICAM_GENTL${BITS}_PATH?"
+    # echo "  This allows GenTL consumer applications to load the FLIR GenTL Producer."
+    # echo "  NOTE: You can add the FLIR producer to GENICAM_GENTL${BITS}_PATH at any time by following the GenTL Setup notes in the included README."
     # echo -n "$MY_YESNO_PROMPT"
 
     # read confirm
@@ -113,12 +114,60 @@ else
     # then
     #     echo "Launching GenTL path configuration script..."
         sudo sh configure_gentl_paths.sh $BITS
-#     fi
+    # fi
 fi
 
 echo
 echo "Installation complete."
 
 echo
+echo "Would you like to make a difference by participating in the Spinnaker feedback program?"
+echo -n "$MY_YESNO_PROMPT"
+read confirm
+if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ] || [ "$confirm" = "yes" ] || [ "$confirm" = "Yes" ] || [ "$confirm" = "" ]
+then
+    feedback_link_msg="Please visit \"$FEEDBACK_PAGE\" to join our feedback program!"
+    if [ $(id -u) -ne 0 ]
+    then
+        set +o errexit
+        has_display=$(xdg-open $FEEDBACK_PAGE 2> /dev/null && echo "ok")
+        set -o errexit
+        if [ "$has_display" != "ok" ]
+        then
+            echo $feedback_link_msg
+        fi
+    elif [ "$PPID" -ne 0 ]
+    then
+        # Script is run as sudo. Find the actual user name.
+        gpid=$(ps --no-heading -o ppid -p $PPID)
+        if [ "$gpid" -ne 0 ]
+        then
+            supid=$(ps --no-heading -o ppid -p $gpid)
+            if [ "$supid" -ne 0 ]
+            then
+                user=$(ps --no-heading -o user -p $supid)
+            fi
+        fi
+
+        if [ -z "$user" ] || [ "$user" = "root" ]
+        then
+            # Root user does not have graphical capabilities.
+            echo $feedback_link_msg
+        else
+            set +o errexit
+            has_display=$(su $user xdg-open $FEEDBACK_PAGE 2> /dev/null && echo "ok")
+            set -o errexit
+            if [ "$has_display" != "ok" ]
+            then
+                echo $feedback_link_msg
+            fi
+        fi
+    else
+        echo $feedback_link_msg
+    fi
+else
+    echo "Join the feedback program anytime at \"$FEEDBACK_PAGE\"!"
+fi
+
 echo "Thank you for installing the Spinnaker SDK."
 exit 0
