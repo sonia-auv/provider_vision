@@ -232,7 +232,10 @@ void acquisition::Capture::load_cameras() {
             
             if (cam.get_id().compare(cam_ids_[j]) == 0) {
                 current_cam_found=true;
-                if (cam.get_id().compare(master_cam_id_) == 0) {
+
+                // first cam you found is your master
+                if (!master_set) {
+                    master_cam_id_=cam_ids_[j];
                     ROS_INFO_STREAM("Camera set as master -"<<cam.get_id());
                     cam.make_master();
                     master_set = true;
