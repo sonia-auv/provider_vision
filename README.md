@@ -6,8 +6,6 @@
 ![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/sonia-auv/provider_vision.svg)
 
 
-*Please read the instructions and fill in the blanks*
-
 
 One Paragraph of project description goes here
 

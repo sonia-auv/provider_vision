@@ -97,17 +97,24 @@ user$:  sudo apt-get install libusb-1.0-0
 ===============================================================================
 
 Once all the dependencies are installed, just install the Spinnaker deb files.
-There are eight different packages that need to be installed.
+There are fifteen different packages that need to be installed.
 
 The Spinnaker packages are:
-- libspinnaker-<version>_<platform>.deb
-- libspinnaker-<version>_<platform>-dev.deb
-- libspinnaker-c-<version>_<platform>.deb
-- libspinnaker-c-<version>_<platform>-dev.deb
-- spinupdate-<version>_<platform>.deb
-- spinupdate-<version>_<platform>-dev.deb
-- spinnaker-<version>_<platform>.deb
-- spinnaker-doc-<version>_<platform>.deb
+- libgentl_<version>_<platform>.deb
+- libspinnaker_<version>_<platform>.deb
+- libspinnaker-dev_<version>_<platform>.deb
+- libspinnaker-c_<version>_<platform>.deb
+- libspinnaker-c-dev_<version>_<platform>.deb
+- libspinvideo_<version>_<platform>.deb
+- libspinvideo-dev_<version>_<platform>.deb
+- libspinvideo-c_<version>_<platform>.deb
+- libspinvideo-c-dev_<version>_<platform>.deb
+- spinnaker_<version>_<platform>.deb
+- spinnaker-doc_<version>_<platform>.deb
+- spinupdate_<version>_<platform>.deb
+- spinupdate-dev_<version>_<platform>.deb
+- spinview-qt_<version>_<platform>.deb
+- spinview-qt-dev_<version>_<platform>.deb
 
 The packages with a preceding 'lib' are all the shared objects and their
 respective dev packages.  The spinnaker-doc package contains our documentation in
@@ -182,6 +189,37 @@ USB-FS memory until the next restart by running the following command:
 If using multiple USB3 cameras, the USB-FS memory limit may need to exceed 1000.
 More information on these changes can be found at:
 <https://www.flir.com/support-center/iis/machine-vision/application-note/understanding-usbfs-on-linux>
+
+On some ARM platforms, the number of buffers that can be submitted to libusb
+is further limited by the following two kernel settings.
+
+1. coherent_pool
+    If Spinnaker fails to begin acquisition and you find messages in dmesg similar to
+    "xhci_hcd 0000:01:00.0: Ring expansion failed" or
+    "usb 2-1: usbfs: usb_submit_urb returned -12",
+    You may want to increase the coherent atomic allocation pool by:
+        
+        1.1 Opening /boot/firmware/cmdline.txt with elevated permission in any text editor.
+
+        1.2 Add the following line at the end of the file or modify the existing entry if it exists:
+            
+            coherent_pool=5M
+
+        1.3 Restart the machine.
+
+2. swiotlb
+    If Spinnaker fails to begin acquisition and you find messages in dmesg similar to
+    "xhci_hcd 0000:01:00.0: swiotlb buffer is full (sz: 16384 bytes), total 32768 (slots), used 32414 (slots)" or
+    "usb 2-1: usbfs: usb_submit_urb returned -11",
+    You may want to increase the swiotlb buffer by:
+
+        1.1 Opening /boot/firmware/cmdline.txt with elevated permission in any text editor.
+
+        1.2 Add the following line at the end of the file or modify the existing entry if it exists:
+            
+            swiotlb=32768
+
+        1.3 Restart the machine.
 
 ===============================================================================
 4. GIGE CAMERA SETUP
@@ -266,6 +304,9 @@ the output difference, in order to find the network adapter name.
 To PERMANENTLY enable Jumbo Packet for a specific network adapter (eg. enp15s0), follow
 one of the methods below.
 
+Note that when the following methods are used in conjunction with each other on Ubuntu 20.04 or newer,
+your interface may sometimes be assigned 2 IP addresses, thus showing up twice in Spinnaker.
+
     Method 1: Netplan (Ubuntu 20.04 or newer)
     
         1. Open up your netplan YAML configuration in /etc/netplan/ in a text editor (as sudo):
@@ -283,11 +324,11 @@ one of the methods below.
                  enp15s0:
                     mtu: 9000
                     addresses: 169.254.0.64/16
-                    dhcp: no
-    
+                    dhcp4: no
+
         3. Restart the network by entering the command in the terminal
            $ sudo netplan apply
-    
+
     Method 2: /etc/network/interfaces (Ubuntu 18.04 or older)
 
         1. Open up /etc/network/interfaces in a text editor (as sudo)
