@@ -23,7 +23,7 @@
   <arg name="config_file"       default="$(find provider_vision)/params/$(env AUV)_params.yaml" doc="File specifying the parameters of the camera_array"/>
 
   <!-- load the acquisition node -->
-  <node pkg="provider_vision" type="provider_vision_node" name="provider_vision" output="$(arg output)" args="" respawn="false" >
+  <node pkg="provider_vision" type="provider_vision_node" name="provider_vision" output="$(arg output)" args="" respawn="true" >
 
     <!-- load the acquisition node parameters file.  Note any parameters provided in this file will 
    override what is in the yaml file.  Thus use it to set parameters camer_array configuration params -->
