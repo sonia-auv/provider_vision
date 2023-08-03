@@ -619,6 +619,8 @@ void acquisition::Capture::init_cameras(bool soft = false) {
             
             cams[i].init();
 
+            cam[i].setEnumValue("AutoExposureLightingMode", "Frontlight");
+
             if (!soft) {
 
                 cams[i].set_color(color_);
