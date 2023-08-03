@@ -14,12 +14,12 @@ jobs:
       TARGET_TYPE: perception
       TARGET_VERSION: feature
       IMAGE_NAME: provider_vision
-      GITHUB_REMOTE_URL: docker.pkg.github.com/${{ github.repository }}
+      GITHUB_REMOTE_URL: ghcr.io/${{ github.repository }}
     steps:
       - uses: actions/checkout@v2
       - name: Login to Github Package Registry
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build the docker image (perception based)
         run: |
           docker build . --tag build-feature-${GITHUB_REF##*/}-${GITHUB_RUN_NUMBER} --build-arg BUILD_DATE=$(date '+%Y-%m-%d_%H:%M:%S') --build-arg VERSION=${GITHUB_REF##*/}-$(date '  +%Y-%m-%d_%H:%M:%S') --build-arg BASE_IMAGE=${BASE_IMAGE} --build-arg TARGET_ARCH=${ARCH}
